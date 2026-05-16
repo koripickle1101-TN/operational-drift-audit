@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Operational Drift Audit™ is a premium healthcare workflow clarity system for identifying operational drift, denial risk, rework, and burnout triggers." />
+  <title>Operational Drift Audit™ | Healthcare Workflow Clarity System</title>
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --black: #000000;
+      --orange: #FF8200;
+      --warm-gray: #F7F3EF;
+      --soft-gray: #E4DDD4;
+      --text-gray: #3A3A3A;
+      --orange-glow: rgba(255, 130, 0, 0.16);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--white);
+      color: var(--black);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--soft-gray);
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(18px);
+      z-index: 10;
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-dot {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 2px solid var(--orange);
+      outline: 8px solid var(--orange-glow);
+    }
+
+    .nav {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .nav a:hover {
+      color: var(--orange);
+    }
+
+    .hero {
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 58px;
+      align-items: center;
+      padding: 72px 0 64px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--black);
+      font-size: 0.76rem;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 44px;
+      height: 2px;
+      background: var(--orange);
+      display: inline-block;
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      letter-spacing: -0.045em;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(3.35rem, 8.5vw, 7.4rem);
+      line-height: 0.88;
+      max-width: 780px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4.4vw, 4.1rem);
+      line-height: 0.96;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 1.45rem;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .accent {
+      color: var(--orange);
+    }
+
+    .subhead {
+      font-size: 1.15rem;
+      color: var(--text-gray);
+      max-width: 680px;
+      margin: 28px 0 32px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 14px 24px;
+      border-radius: 999px;
+      border: 1.5px solid var(--black);
+      font-weight: 800;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.09);
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: var(--black);
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .hero-card {
+      background: var(--warm-gray);
+      border: 1px solid var(--soft-gray);
+      padding: 34px;
+      border-radius: 36px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 290px;
+      height: 290px;
+      border-radius: 50%;
+      border: 2px solid var(--orange);
+      outline: 14px solid var(--orange-glow);
+      top: -100px;
+      right: -100px;
+    }
+
+    .hero-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .price {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(3.8rem, 8vw, 5.6rem);
+      line-height: 1;
+      margin: 18px 0 10px;
+      letter-spacing: -0.06em;
+    }
+
+    .small {
+      color: var(--text-gray);
+      font-size: 0.95rem;
+    }
+
+    .card-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .mini-card {
+      background: var(--white);
+      border: 1px solid var(--soft-gray);
+      border-radius: 22px;
+      padding: 16px 18px;
+      font-weight: 800;
+    }
+
+    section {
+      padding: 78px 0;
+      border-top: 1px solid var(--soft-gray);
+    }
+
+    .section-intro {
+      max-width: 780px;
+      margin-bottom: 36px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 26px;
+    }
+
+    .feature {
+      background: var(--white);
+      border: 1px solid var(--soft-gray);
+      border-radius: 30px;
+      padding: 26px;
+      min-height: 190px;
+    }
+
+    .node {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid var(--orange);
+      outline: 8px solid var(--orange-glow);
+      margin-bottom: 22px;
+      background: var(--white);
+    }
+
+    .workflow-strip {
+      background: var(--black);
+      color: var(--white);
+      border-radius: 38px;
+      padding: 38px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .workflow-strip::after {
+      content: "";
+      position: absolute;
+      bottom: -70px;
+      right: -70px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 2px dotted var(--orange);
+      opacity: 0.85;
+    }
+
+    .workflow-strip h2, .workflow-strip p {
+      position: relative;
+      z-index: 1;
+    }
+
+    .workflow-steps {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .step {
+      border: 1px dotted rgba(255, 255, 255, 0.38);
+      border-radius: 20px;
+      padding: 14px;
+      min-height: 82px;
+    }
+
+    .step span {
+      color: var(--orange);
+      font-weight: 900;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .clean-list {
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    .clean-list li {
+      margin-bottom: 10px;
+    }
+
+    .included-box {
+      background: var(--warm-gray);
+      border: 1px solid var(--soft-gray);
+      border-radius: 30px;
+      padding: 28px;
+    }
+
+    .notice {
+      background: var(--warm-gray);
+      border-left: 6px solid var(--orange);
+      padding: 22px;
+      border-radius: 20px;
+      margin-top: 24px;
+    }
+
+    .payment-box {
+      background: var(--warm-gray);
+      border: 1px solid var(--soft-gray);
+      border-radius: 38px;
+      padding: 34px;
+      text-align: center;
+    }
+
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 26px;
+      text-align: left;
+    }
+
+    .payment-card {
+      background: var(--white);
+      border: 1px solid var(--soft-gray);
+      border-radius: 28px;
+      padding: 26px;
+    }
+
+    .payment-card strong {
+      display: block;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .delivery {
+      background: var(--black);
+      color: var(--white);
+      border-radius: 38px;
+      padding: 38px;
+    }
+
+    .delivery h2 {
+      color: var(--white);
+    }
+
+    .footer {
+      padding: 52px 0 34px;
+      border-top: 1px solid var(--soft-gray);
+      text-align: center;
+    }
+
+    .signature {
+      font-family: 'Brush Script MT', 'Segoe Script', 'Lucida Handwriting', cursive;
+      font-size: 2.35rem;
+      font-style: italic;
+      letter-spacing: 0.02em;
+      color: #222;
+      transform: rotate(-2deg);
+      display: inline-block;
+      margin: 8px 0 16px;
+    }
+
+    .icon-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .icon-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--soft-gray);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s ease;
+      background: var(--white);
+    }
+
+    .icon-link:hover {
+      border-color: var(--orange);
+      box-shadow: 0 10px 26px var(--orange-glow);
+      transform: translateY(-2px);
+    }
+
+    svg {
+      width: 19px;
+      height: 19px;
+      fill: var(--black);
+    }
+
+    @media (max-width: 880px) {
+      .topbar {
+        align-items: flex-start;
+        gap: 14px;
+        flex-direction: column;
+        position: static;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .hero,
+      .grid-2,
+      .grid-3,
+      .payment-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 46px;
+      }
+
+      .workflow-steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .page {
+        width: min(100% - 28px, 1120px);
+      }
+
+      h1 {
+        font-size: 3.2rem;
+      }
+
+      section {
+        padding: 56px 0;
+      }
+
+      .workflow-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .workflow-strip,
+      .delivery,
+      .payment-box {
+        border-radius: 28px;
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand-mark" href="#top" aria-label="Operational Drift Audit home">
+        <span class="brand-dot"></span>
+        <span>Operational Drift Audit™</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#included">Included</a>
+        <a href="#fit">Who It’s For</a>
+        <a href="#payment">Buy</a>
+        <a href="#disclaimer">Disclaimer</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div>
+          <div class="eyebrow">Healthcare Operations Toolkit</div>
+          <h1>Operational Drift <span class="accent">Audit™</span></h1>
+          <p class="subhead">A premium healthcare workflow clarity system for finding where operations break before they become denials, delays, rework, or burnout.</p>
+          <div class="button-row">
+            <a class="btn btn-primary" href="#payment">Buy Now — $39</a>
+            <a class="btn btn-secondary" href="#included">See What’s Included</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Product price and highlights">
+          <div class="eyebrow">Starter Launch Price</div>
+          <div class="price">$39</div>
+          <p class="small">Delivered as a Google Sheets dashboard, workbook guide, PDF guide, and customer delivery guide.</p>
+          <div class="card-list">
+            <div class="mini-card">Workflow Audit Diagnostic Engine</div>
+            <div class="mini-card">Drift Scorecard™</div>
+            <div class="mini-card">Denial Risk Heatmap™</div>
+            <div class="mini-card">7-Day Action Plan™</div>
+          </div>
+        </aside>
+      </section>
+
+      <section>
+        <div class="section-intro">
+          <h2>Make hidden workflow friction visible.</h2>
+          <p>Healthcare workflow problems rarely start where they finally become visible. A denial may begin with missed eligibility verification. A delayed claim may begin with incomplete documentation. A frustrated patient may be reacting to unclear authorization status. Burnout may begin with repeated invisible rework.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="feature">
+            <div class="node"></div>
+            <h3>Find operational drift</h3>
+            <p>Identify where workflow clarity, ownership, and visibility are breaking down across the patient-to-payment path.</p>
+          </article>
+          <article class="feature">
+            <div class="node"></div>
+            <h3>Spot denial risk signals</h3>
+            <p>Connect upstream administrative instability to possible claim delays, denial exposure, and rework pressure.</p>
+          </article>
+          <article class="feature">
+            <div class="node"></div>
+            <h3>Choose one focused fix</h3>
+            <p>Move from scattered workflow stress into a practical 7-day action plan with ownership and a success measure.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <div class="workflow-strip">
+          <h2>Built around the patient-to-payment workflow.</h2>
+          <p>The dashboard reviews core healthcare administration stages where small breakdowns can compound into larger revenue-cycle problems.</p>
+          <div class="workflow-steps">
+            <div class="step"><span>01</span>Patient Intake</div>
+            <div class="step"><span>02</span>Eligibility Verification</div>
+            <div class="step"><span>03</span>Scheduling</div>
+            <div class="step"><span>04</span>Prior Authorization</div>
+            <div class="step"><span>05</span>Documentation Flow</div>
+            <div class="step"><span>06</span>Coding Readiness</div>
+            <div class="step"><span>07</span>Claim Submission</div>
+            <div class="step"><span>08</span>Denial Follow-Up</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="included">
+        <div class="section-intro">
+          <h2>What’s included</h2>
+          <p>Everything is structured so customers know exactly what to open, copy, score, review, and use.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="included-box">
+            <h3>Dashboard System</h3>
+            <ul class="clean-list">
+              <li>Google Sheets Workflow Audit Dashboard</li>
+              <li>Workflow Audit Diagnostic Engine</li>
+              <li>Drift Scorecard Executive Summary</li>
+              <li>Denial Risk Heatmap</li>
+              <li>Priority Matrix</li>
+              <li>7-Day Action Plan</li>
+            </ul>
+          </div>
+          <div class="included-box">
+            <h3>Customer Guide Files</h3>
+            <ul class="clean-list">
+              <li>Editable Workbook Guide</li>
+              <li>PDF Workbook Guide</li>
+              <li>Customer Delivery Guide</li>
+              <li>Copy instructions</li>
+              <li>Scoring guide</li>
+              <li>Customer use disclaimer</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="fit">
+        <div class="grid-2">
+          <div>
+            <h2>Who it’s for</h2>
+            <ul class="clean-list">
+              <li>Healthcare administration students</li>
+              <li>Remote healthcare administrative support workers</li>
+              <li>Women in healthcare administration</li>
+              <li>Small clinic operators and practice managers</li>
+              <li>Revenue cycle beginners</li>
+              <li>Healthcare operations learners building practical skill</li>
+            </ul>
+          </div>
+          <div>
+            <h2>Who it’s not for</h2>
+            <ul class="clean-list">
+              <li>Anyone looking for legal, billing, coding, compliance, clinical, or financial advice</li>
+              <li>Organizations needing a full enterprise RCM platform</li>
+              <li>Users expecting EHR integration</li>
+              <li>Anyone needing payer-specific coding or billing determinations</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="payment">
+        <div class="payment-box">
+          <div class="eyebrow">Manual Payment Checkout</div>
+          <h2>Get the Operational Drift Audit™</h2>
+          <div class="price">$39</div>
+          <p>Use one payment option below. After payment, send payment confirmation and the best email address for delivery.</p>
+
+          <div class="payment-grid">
+            <article class="payment-card">
+              <strong>Venmo</strong>
+              <p>Pay $39 through Venmo using <strong>@Kori-Pickle</strong>.</p>
+              <a class="btn btn-primary" href="https://venmo.com/Kori-Pickle" target="_blank" rel="noopener">Pay with Venmo</a>
+            </article>
+
+            <article class="payment-card">
+              <strong>Manual Chime Option</strong>
+              <p>Use this option only if you prefer to request manual Chime payment instructions.</p>
+              <a class="btn btn-secondary" href="mailto:koripickle1101@gmail.com?subject=Operational%20Drift%20Audit%20Payment&body=Hi%20Kori,%20I%20would%20like%20to%20purchase%20Operational%20Drift%20Audit.%20Please%20send%20payment%20instructions.">Request Chime Instructions</a>
+            </article>
+          </div>
+
+          <div class="notice">
+            <strong>Manual delivery note:</strong> After payment, send a screenshot or confirmation with your email address so your customer files can be delivered. Customer files are delivered manually through Google Drive links.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="delivery">
+          <h2>How delivery works</h2>
+          <ol>
+            <li>Customer submits payment.</li>
+            <li>Customer sends payment confirmation and email address.</li>
+            <li>Kori sends the Customer Delivery Guide.</li>
+            <li>Customer opens the dashboard and selects <strong>File &gt; Make a copy</strong>.</li>
+            <li>Customer uses the workbook guide to complete the audit accurately.</li>
+          </ol>
+          <p><span class="accent">Important:</span> This is a manual checkout workflow. It is simple, free to set up, and designed for early product validation.</p>
+        </div>
+      </section>
+
+      <section id="disclaimer">
+        <h2>Disclaimer</h2>
+        <p>Operational Drift Audit™ is an operational education and workflow visibility tool. It is not legal, billing, coding, compliance, clinical, or financial advice. Users should adapt this tool to their organization’s internal policies, payer rules, compliance requirements, and qualified professional guidance.</p>
+        <p>This product does not guarantee denial reduction, reimbursement improvement, compliance outcomes, revenue improvement, or operational performance results. It is designed to support workflow visibility, structured thinking, and operational review.</p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>Created by Kori Pickle</div>
+      <div class="signature">Kori Pickle</div>
+      <div class="icon-row" aria-label="Social links">
+        <a class="icon-link" href="https://www.linkedin.com/in/kori-p-865jct" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27h-.02ZM5.32 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.1 20.45H3.54V9H7.1v11.45ZM22.22 0H1.77C.8 0 0 .77 0 1.73v20.54C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+        </a>
+        <a class="icon-link" href="https://github.com/koripickle1101-TN" target="_blank" rel="noopener" aria-label="GitHub profile">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.41-4.04-1.41-.55-1.38-1.33-1.75-1.33-1.75-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.44 11.44 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .3Z"/></svg>
+        </a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
